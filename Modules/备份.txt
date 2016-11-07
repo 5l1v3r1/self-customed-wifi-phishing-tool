@@ -1,0 +1,12 @@
+def shell(command,outf=subprocess.PIPE,errf=subprocess.PIPE,out=True,err=True):
+    '''
+       我封装了这个函数,outf,errf可以赋值为open(os.devnull, 'w'),out,err如果不为False那么返回结果
+       就会包含输出信息和错误信息
+    '''
+    proc=subprocess.Popen(command,shell=True,stdout=outf,stderr=errf,stdin=subprocess.PIPE)
+    result=''
+    if out:
+        result += proc.stdout.read()
+    if err:
+        result += proc.stderr.read()
+    return  result
